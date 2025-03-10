@@ -1,6 +1,7 @@
 #include <ctype.h>
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #define MAX 100
@@ -134,6 +135,42 @@ int exo42(int *a, int *b) {
     }
 }
 
+int exo61(void) {
+    int nbval;
+
+    printf("Tapez nombre de val : \n");
+    scanf("%d", &nbval);
+
+    // ALLOC DYN TAB
+    double *tab = malloc(nbval*sizeof(double));
+    if (tab == NULL) {
+        printf("AH ! erreur d'allocation");
+        return 1;
+    }
+
+    // REMPLIR TABLEAU
+    printf("Saisie valeurs : \n");
+    for (int i = 0; i < nbval; i++) {
+        scanf("%lf", &tab[i]);
+    }
+
+    // PRINT TABLEAU
+    for (int i = 0; i < nbval; i++) {
+        printf("%.2f ", tab[i]);
+    }
+
+    // FREE MEM
+    free(tab);
+
+    return 0;
+
+}
+
+int exo62(void) {
+
+    return 0;
+}
+
 int main(void) {
     /*
     double miles,km;
@@ -173,6 +210,7 @@ int main(void) {
     // EXO 41 FIN //
 
     // EXO 42 DEB //
+    /*
     int a,b;
     printf("Inserez première val : \n");
     scanf("%d", &a);
@@ -180,8 +218,11 @@ int main(void) {
     scanf("%d", &b);
     exo42(&a,&b);
     printf("Plus petite : %d, Plus grande : %d \n", a, b);
-
+    */
     // EXO 42 FIN //
+
+    exo61();
+    //exo62();
 
     return 0;
 }
