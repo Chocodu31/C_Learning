@@ -166,9 +166,52 @@ int exo61(void) {
 
 }
 
-int exo62(void) {
+struct Cellule {
+    int Val;
+    struct Cellule* pSuiv;
+};
 
-    return 0;
+//Liste chaînée
+void exo62_ENTETE(struct Cellule **pListe, int v) {
+    struct Cellule *pNouv = malloc(sizeof(struct Cellule));
+    pNouv->Val = v;
+    pNouv->pSuiv = *pListe;
+    *pListe = pNouv;
+}
+
+void exo62_AFFICHER(struct Cellule *pliste) {
+    printf("Elements de la liste : ");
+    while (pliste != NULL) {
+        printf("%d ", pliste->Val);
+        pliste = pliste->pSuiv;
+    }
+    printf("\n");
+}
+
+void exo62_ENFIN(struct Cellule **pListe, int v) {
+    struct Cellule *pNouv = malloc(sizeof(struct Cellule));
+    pNouv->Val = v;
+    pNouv->pSuiv = NULL;
+
+    if (*pListe == NULL) {
+        *pListe = pNouv;
+    } else {
+        struct Cellule *pCour = *pListe;
+        while (pCour->pSuiv != NULL) {
+            pCour = pCour->pSuiv;
+        }
+        pCour->pSuiv = pNouv;
+    }
+}
+
+void exo62_FREE(struct Cellule **pListe) {
+    struct Cellule *pPrec,*pCour = *pListe;
+    while (pCour != NULL) {
+        pPrec = pCour;
+        pCour = pCour->pSuiv;
+        free(pPrec);
+    }
+    *pListe = NULL;
 }
 
 int main(void) {
@@ -221,8 +264,21 @@ int main(void) {
     */
     // EXO 42 FIN //
 
-    exo61();
-    //exo62();
+    //exo61();:
 
+    // EXO 62 DEB //
+    struct Cellule *Liste = NULL;
+    exo62_ENTETE(&Liste, 25);
+    exo62_AFFICHER(Liste);
+    exo62_ENTETE(&Liste, 9);
+    exo62_ENTETE(&Liste, 12);
+    exo62_AFFICHER(Liste);
+    exo62_ENFIN(&Liste, 12);
+    exo62_AFFICHER(Liste);
+    exo62_ENFIN(&Liste, 2);
+    exo62_AFFICHER(Liste);
+    exo62_FREE(&Liste);
+    exo62_AFFICHER(Liste);
+    // EXO 62 FIN//
     return 0;
 }
