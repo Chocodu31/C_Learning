@@ -280,7 +280,5 @@ int main(void) {
     exo62_FREE(&Liste);
     exo62_AFFICHER(Liste);
     // EXO 62 FIN//
-
-
     return 0;
 }
